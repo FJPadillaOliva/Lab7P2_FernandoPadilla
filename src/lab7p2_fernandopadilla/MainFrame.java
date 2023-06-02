@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -52,10 +53,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "id", "name", "category", "price", "aisle", "bin"
@@ -145,8 +143,10 @@ public class MainFrame extends javax.swing.JFrame {
         int id, category,aisle,bin;
         String name;
         double price;
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
         try {
-            archivo = new File("./datos.txt");
+            archivo = new File("./data.txt");
             canal = new FileReader(archivo);
             buffer = new BufferedReader(canal);
             String linea="";
@@ -158,10 +158,20 @@ public class MainFrame extends javax.swing.JFrame {
                 price = Double.parseDouble(tokens[3]);
                 aisle = Integer.parseInt(tokens[4]);
                 bin = Integer.parseInt(tokens[5]);
-                Object[] data = {id, name, category, price, aisle, bin};
+                productos.add(new Producto(id, name, category, price, aisle, bin));
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        Object[] Data = new Object[6];
+        for (int i = 0; i < productos.size(); i++) {
+            Data[0] = productos.get(i).getId();
+            Data[1] = productos.get(i).getName();
+            Data[2] = productos.get(i).getCategory();
+            Data[3] = productos.get(i).getPrice();
+            Data[4] = productos.get(i).getAisle();
+            Data[5] = productos.get(i).getBin();
+            model.addRow(Data);
         }
     }//GEN-LAST:event_jButton2MouseClicked
 

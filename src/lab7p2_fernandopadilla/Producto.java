@@ -76,6 +76,12 @@ public class Producto {
             this.bin = bin;    
         }
     }
+
+    @Override
+    public String toString() {
+        return "{" + "id=" + id + ", name=" + name + ", category=" + category + ", price=" + price + ", aisle=" + aisle + ", bin=" + bin + '}';
+    }
+    
     
     
     

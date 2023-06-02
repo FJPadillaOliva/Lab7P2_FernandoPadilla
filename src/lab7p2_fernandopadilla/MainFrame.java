@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -297,6 +299,44 @@ public class MainFrame extends javax.swing.JFrame {
             String d6 = jTable2.getValueAt(i, 5).toString();
             datos += d1 + "," +d2+","+d3+","+d4+","+d5+","+d6+"\n";
         }
+        
+        JFileChooser jfc = new JFileChooser();
+        FileNameExtensionFilter filtro = 
+                    new FileNameExtensionFilter(
+                            "Archivos de Texto", "txt");
+         jfc.addChoosableFileFilter(filtro); 
+        int seleccion = jfc.showSaveDialog(this);        
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+             try {
+                 
+                  File fichero=null;
+                if (jfc.getFileFilter().getDescription().equals(
+                        "Archivos de Texto")) {
+                    fichero = 
+                        new File(jfc.getSelectedFile().getPath()+".txt");
+                }else{
+                    fichero = jfc.getSelectedFile();
+                }                             
+                fw = new FileWriter(fichero);
+                bw = new BufferedWriter(fw);
+                bw.write(datos);
+                bw.flush();         
+                JOptionPane.showMessageDialog(this, 
+                        "Archivo guardado exitosamente");  
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                    bw.close();
+                    fw.close();
+                } catch (IOException ex) {
+           }                     
+        }//fin IF
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
     }//GEN-LAST:event_jButton2MouseClicked
 
     /**

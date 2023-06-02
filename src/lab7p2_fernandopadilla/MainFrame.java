@@ -312,14 +312,13 @@ public class MainFrame extends javax.swing.JFrame {
         BufferedWriter bw = null;
         if (seleccion == JFileChooser.APPROVE_OPTION) {
              try {
-                 
                   File fichero=null;
                 if (jfc.getFileFilter().getDescription().equals(
                         "Archivos de Texto")) {
                     fichero = 
                         new File(jfc.getSelectedFile().getPath()+".txt");
                 }else{
-                    fichero = jfc.getSelectedFile();
+                    fichero = new File(jfc.getSelectedFile().getPath()+".txt");
                 }                             
                 fw = new FileWriter(fichero);
                 bw = new BufferedWriter(fw);

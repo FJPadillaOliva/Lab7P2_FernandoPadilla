@@ -4,6 +4,14 @@
  */
 package lab7p2_fernandopadilla;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Wendy
@@ -13,8 +21,10 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
+    ArrayList<Producto> productos = new ArrayList();
     public MainFrame() {
         initComponents();
+        
     }
 
     /**
@@ -51,16 +61,9 @@ public class MainFrame extends javax.swing.JFrame {
                 "id", "name", "category", "price", "aisle", "bin"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -71,6 +74,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton1.setText("Exportar Datos");
 
         jButton2.setText("Actualizar Tabla");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -128,6 +136,34 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        File archivo=null;
+        FileReader canal =null;
+        BufferedReader buffer =null;
+        int id, category,aisle,bin;
+        String name;
+        double price;
+        try {
+            archivo = new File("./datos.txt");
+            canal = new FileReader(archivo);
+            buffer = new BufferedReader(canal);
+            String linea="";
+            while ( (linea=buffer.readLine()) != null) {
+                String[] tokens=linea.split(",");
+                id = Integer.parseInt(tokens[0]);
+                name = tokens[1];
+                category = Integer.parseInt(tokens[2]);
+                price = Double.parseDouble(tokens[3]);
+                aisle = Integer.parseInt(tokens[4]);
+                bin = Integer.parseInt(tokens[5]);
+                Object[] data = {id, name, category, price, aisle, bin};
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments

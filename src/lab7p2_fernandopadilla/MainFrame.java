@@ -214,14 +214,16 @@ public class MainFrame extends javax.swing.JFrame {
             buffer = new BufferedReader(canal);
             String linea="";
             while ( (linea=buffer.readLine()) != null) {
-                String[] tokens=linea.split(",");
-                id = Integer.parseInt(tokens[0]);
-                name = tokens[1];
-                category = Integer.parseInt(tokens[2]);
-                price = Double.parseDouble(tokens[3]);
-                aisle = Integer.parseInt(tokens[4]);
-                bin = Integer.parseInt(tokens[5]);
-                productos.add(new Producto(id, name, category, price, aisle, bin));
+                if (!linea.startsWith("id,name,category,price,aisle,bin")) {
+                    String[] tokens=linea.split(",");
+                    id = Integer.parseInt(tokens[0]);
+                    name = tokens[1];
+                    category = Integer.parseInt(tokens[2]);
+                    price = Double.parseDouble(tokens[3]);
+                    aisle = Integer.parseInt(tokens[4]);
+                    bin = Integer.parseInt(tokens[5]);
+                    productos.add(new Producto(id, name, category, price, aisle, bin));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

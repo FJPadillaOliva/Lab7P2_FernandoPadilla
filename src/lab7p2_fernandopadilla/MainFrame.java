@@ -289,7 +289,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        String datos = "";
+        String datos = "id,name,category,price,aisle,bin\n";
         for (int i = 0; i < jTable2.getRowCount(); i++) {
             String d1 = jTable2.getValueAt(i, 0).toString();
             String d2 = jTable2.getValueAt(i, 1).toString();

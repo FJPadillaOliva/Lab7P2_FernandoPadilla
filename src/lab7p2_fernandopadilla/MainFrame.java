@@ -287,6 +287,16 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
+        String datos = "";
+        for (int i = 0; i < jTable2.getRowCount(); i++) {
+            String d1 = jTable2.getValueAt(i, 0).toString();
+            String d2 = jTable2.getValueAt(i, 1).toString();
+            String d3 = jTable2.getValueAt(i, 2).toString();
+            String d4 = jTable2.getValueAt(i, 3).toString();
+            String d5 = jTable2.getValueAt(i, 4).toString();
+            String d6 = jTable2.getValueAt(i, 5).toString();
+            datos += d1 + "," +d2+","+d3+","+d4+","+d5+","+d6+"\n";
+        }
     }//GEN-LAST:event_jButton2MouseClicked
 
     /**

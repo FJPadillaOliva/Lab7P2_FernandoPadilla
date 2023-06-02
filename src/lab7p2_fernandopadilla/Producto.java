@@ -1,6 +1,8 @@
 
 package lab7p2_fernandopadilla;
 
+import java.util.ArrayList;
+
 
 public class Producto {
     private int id;
@@ -8,7 +10,7 @@ public class Producto {
     private int category;
     private double price;
     private int aisle, bin;
-
+    
     public Producto() {
     }
 
@@ -74,6 +76,7 @@ public class Producto {
             this.bin = bin;    
         }
     }
+    
     
     
 }
